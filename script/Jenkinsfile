@@ -19,9 +19,9 @@ pipeline{
         }
         stage('upload artifact'){
             steps{
-                sh 'curl -uadmin:AP5W3QwUNxGwfmEsFDfksXWfvkE -T \
-                 target/bio*.jar\
-                "http://ec2-100-26-163-246.compute-1.amazonaws.com:8081/artifactory/geolocation/geo/bio_${BUILD_ID}.jar"'
+                sh 'curl -u<USERNAME>:<PASSWORD> -T \
+                 target/bio*.jar "http://ec2-100-24-255-33.compute-1.amazonaws.com:8081/artifactory/geolocation/geo/bio_${BUILD_ID}.jar"'
+                
             }
         }
         stage('docker login1'){
