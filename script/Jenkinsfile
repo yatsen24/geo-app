@@ -34,7 +34,20 @@ pipeline{
         }
         stage('docker build'){
             steps{
-                sh 'docker build -t utc-app-dev'
+                sh 'docker build -t utc-app-dev:v.${BUILD_ID} .'
+            }
+        }
+        stage('image tagging'){
+            steps{
+                sh 'docker tag utc-app-dev:latest 831354348245.dkr.ecr.us-east-1.amazonaws.com/utc-app-dev:latest'
+                sh 'docker tag utc-app-dev:latest \
+                831354348245.dkr.ecr.us-east-1.amazonaws.com/utc-app-dev:v.${BUILD_ID}'
+            }
+        }
+        stape('image push'){
+            steps{
+                sh 'docker push 831354348245.dkr.ecr.us-east-1.amazonaws.com/utc-app-dev:latest'
+                sh 'docker push 831354348245.dkr.ecr.us-east-1.amazonaws.com/utc-app-dev:v.${BUILD_ID}'
             }
         }
     }
