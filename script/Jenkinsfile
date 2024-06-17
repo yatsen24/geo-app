@@ -32,5 +32,10 @@ pipeline{
 
             }
         }
+        stage('docker build'){
+            steps{
+                sh 'docker build -t utc-app-dev'
+            }
+        }
     }
 }
